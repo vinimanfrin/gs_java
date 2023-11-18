@@ -2,7 +2,7 @@ package br.com.fiap.domain.service;
 
 import br.com.fiap.domain.entity.Endereco;
 import br.com.fiap.domain.repository.EnderecoRepository;
-import javassist.NotFoundException;
+
 
 import java.util.List;
 

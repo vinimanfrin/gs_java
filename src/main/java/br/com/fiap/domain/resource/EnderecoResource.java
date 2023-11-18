@@ -34,7 +34,7 @@ public class EnderecoResource {
     @Path("/{id}")
     public Response findById(@PathParam("id")Long id){
         Endereco endereco = service.findById(id);
-        if (Objects.isNull(endereco)) throw new NotFoundException( "Não temos Endereço cadastrado com o id: " + id );
+        if (Objects.isNull(endereco)) return Response.status(404).build();
         return Response.ok(new DetalhamentoEnderecoDTO(endereco)).build();
     }
 
