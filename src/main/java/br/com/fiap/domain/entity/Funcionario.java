@@ -1,26 +1,35 @@
 package br.com.fiap.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import br.com.fiap.domain.dto.funcionario.PersistFuncionarioDTO;
+import br.com.fiap.domain.dto.funcionario.UpdateFuncionarioDTO;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Funcionario {
 
-    @Setter(AccessLevel.NONE)
+
     private Long id;
     private String nome;
     private String cpf;
     private String email;
     private RedeHospitalar redeHospitalar;
 
-    public Funcionario(String nome, String cpf, String email,RedeHospitalar redeHospitalar) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.redeHospitalar = redeHospitalar;
+
+    public Funcionario(PersistFuncionarioDTO dto) {
+        this.nome  = dto.nome();
+        this.cpf = dto.cpf();
+        this.email = dto.email();
+        this.redeHospitalar = new RedeHospitalar();
+        redeHospitalar.setId(dto.idRedeHospitalar());
+    }
+
+    public Funcionario(UpdateFuncionarioDTO dto) {
+        this.id = dto.id();
+        this.email = dto.email();
+        this.redeHospitalar = new RedeHospitalar();
+        redeHospitalar.setId(dto.idRedeHospitalar());
     }
 }

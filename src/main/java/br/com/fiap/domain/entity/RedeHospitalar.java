@@ -1,5 +1,6 @@
 package br.com.fiap.domain.entity;
 
+import br.com.fiap.domain.dto.funcionario.UpdateFuncionarioDTO;
 import br.com.fiap.domain.dto.redeHospitalar.PersistRedeHospitalarDTO;
 import br.com.fiap.domain.dto.redeHospitalar.UpdateRedeHospitalarDTO;
 import lombok.*;
@@ -27,4 +28,6 @@ public class RedeHospitalar {
         this.id = updateRedeHospitalarDTO.id();
         this.razaoSocial = updateRedeHospitalarDTO.razaoSocial();
     }
+
+
 }
