@@ -92,6 +92,41 @@ public class PacienteRepository {
         }
         return paciente;
     }
+    public Paciente findByCpf(String cpf) {
+        Paciente paciente = null;
+        Connection connection = factory.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            var sql = "SELECT * FROM T_IA_PACIENTE WHERE NR_CPF=?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,cpf);
+            rs = ps.executeQuery();
+            if (rs.isBeforeFirst()){
+                while (rs.next()){
+                    Long id = rs.getLong("ID_PACIENTE");
+                    String nome = rs.getString("NM_PACIENTE");
+                    Integer idade = rs.getInt("NR_IDADE");
+                    String email = rs.getString("DS_EMAIL");
+                    LocalDate dataNascimento = rs.getDate("DT_NASCIMENTO").toLocalDate();
+                    Sexo sexo = Sexo.valueOf(rs.getString("TP_SEXO"));
+                    double peso = rs.getDouble("NR_PESO");
+                    double altura = rs.getDouble("NR_ALTURA");
+                    paciente = new Paciente(id,nome,cpf,email,dataNascimento,sexo,peso,altura);
+                }
+            }
+            else {
+                System.err.println("Paciente não encontrado com o cpf:"+cpf);
+            }
+        }
+        catch (SQLException e){
+            System.err.println("Não foi possível realizar a consulta no banco de dados "+ e.getMessage());
+        }
+        finally {
+            fecharObjetos(rs,ps,connection);
+        }
+        return paciente;
+    }
 
     public Paciente persist(Paciente paciente) {
         var sql = "BEGIN INSERT INTO T_IA_PACIENTE (NM_PACIENTE, NR_CPF, NR_IDADE, DS_EMAIL,DT_NASCIMENTO,TP_SEXO, NR_PESO, NR_ALTURA) VALUES (?,?,?,?,?,?,?,?) returning ID_PACIENTE into ?; END;";

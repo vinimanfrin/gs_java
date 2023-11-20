@@ -5,6 +5,7 @@ import br.com.fiap.domain.entity.Paciente;
 import br.com.fiap.domain.repository.PacienteRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PacienteService {
     private PacienteRepository repository = PacienteRepository.build();
@@ -18,7 +19,11 @@ public class PacienteService {
     }
 
     public Paciente persist(Paciente paciente) {
-        return repository.persist(paciente);
+        Paciente pacienteComCadastro = repository.findByCpf(paciente.getCpf());
+        if (Objects.isNull(pacienteComCadastro)) {
+            return repository.persist(paciente);
+        }
+        throw new RuntimeException("Paciente ja cadastrado");
     }
 
     public boolean delete(Long id) {
@@ -27,5 +32,9 @@ public class PacienteService {
 
     public Paciente update(Paciente paciente)  {
         return repository.update(paciente);
+    }
+
+    public Paciente findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
     }
 }

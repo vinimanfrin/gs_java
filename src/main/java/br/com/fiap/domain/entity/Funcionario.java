@@ -32,4 +32,6 @@ public class Funcionario {
         this.redeHospitalar = new RedeHospitalar();
         redeHospitalar.setId(dto.idRedeHospitalar());
     }
+
+
 }

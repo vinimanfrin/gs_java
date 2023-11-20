@@ -1,6 +1,6 @@
 package br.com.fiap.domain.entity;
 
-public enum ResultadoProagnostico {
+public enum ResultadoPrognostico {
     PNEUMONIA,
     TUBERCULOSE,
     NORMAL
