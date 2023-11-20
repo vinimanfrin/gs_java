@@ -1,4 +1,4 @@
-package br.com.fiap.infra.configurarion.cors;
+package br.com.fiap.infra.configuration.cors;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;

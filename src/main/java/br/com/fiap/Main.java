@@ -1,9 +1,9 @@
 package br.com.fiap;
 
 import br.com.fiap.infra.ConnectionFactory;
-import br.com.fiap.infra.configurarion.cors.CORSFilter;
-import br.com.fiap.infra.configurarion.exception.ConstraintViolationExceptionMapper;
-import br.com.fiap.infra.configurarion.exception.ExceptionHandling;
+import br.com.fiap.infra.configuration.cors.CORSFilter;
+import br.com.fiap.infra.configuration.exception.ConstraintViolationExceptionMapper;
+import br.com.fiap.infra.configuration.exception.ExceptionHandling;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -20,7 +20,8 @@ public class Main {
                 .register(ExceptionHandling.class)
                 .register(ConstraintViolationExceptionMapper.class)
                 .register( ConnectionFactory.build() )
-                .packages( "br.com.fiap.domain.resource" );
+                .packages( "br.com.fiap.domain.resource" )
+                .packages("br.com.fiap.infra.configuration.security.resource");
         return GrizzlyHttpServerFactory.createHttpServer( URI.create( BASE_URI ), rc );
     }
 

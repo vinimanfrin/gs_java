@@ -1,4 +1,4 @@
-package br.com.fiap.infra.configurarion.exception;
+package br.com.fiap.infra.configuration.exception;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
