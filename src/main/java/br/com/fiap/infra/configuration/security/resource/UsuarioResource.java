@@ -29,6 +29,7 @@ public class UsuarioResource {
         List<DetalhamentoUsuarioDTO> dtos = all.stream().map(DetalhamentoUsuarioDTO::new).collect(Collectors.toList());
         return Response.ok(dtos).build();
     }
+
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id")Long id){
@@ -75,5 +76,4 @@ public class UsuarioResource {
             return Response.status(401).build();
         return Response.ok(new DetalhamentoUsuarioDTO(usuarioAutenticado)).build();
     }
-
 }

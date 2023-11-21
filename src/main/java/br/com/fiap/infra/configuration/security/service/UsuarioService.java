@@ -23,6 +23,7 @@ public class UsuarioService {
     }
 
     public Usuario persist(Usuario usuario) {
+        usuario.setPassword(Password.encoder(usuario.getPassword()));
         Funcionario funcionario = funcionarioService.persist(usuario.getFuncionario());
         if (Objects.isNull(funcionario)) return null;
         usuario.setFuncionario(funcionario);
@@ -45,6 +46,5 @@ public class UsuarioService {
             return usuario;
         }
         return null;
-
     }
 }

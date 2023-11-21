@@ -31,7 +31,6 @@ public class Password {
         } catch (NoSuchAlgorithmException e) {
             System.err.println( "Não foi possível utilizar o algoritmo" + algorithm.getAlgorithm() + ":\n" + e.getMessage() );
         }
-
         return hexPass.toString();
     }
 
@@ -45,7 +44,7 @@ public class Password {
     public static boolean check(String pass, String hash) {
 
         String v = encoder( pass );
-        String h = encoder(hash);
-        return v.equals( h );
+
+        return v.equals( hash );
     }
 }
