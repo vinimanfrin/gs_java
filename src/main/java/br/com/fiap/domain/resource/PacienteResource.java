@@ -3,6 +3,7 @@ package br.com.fiap.domain.resource;
 import br.com.fiap.domain.dto.endereco.DetalhamentoEnderecoDTO;
 import br.com.fiap.domain.dto.endereco.PersistEnderecoDTO;
 import br.com.fiap.domain.dto.endereco.UpdateEnderecoDTO;
+import br.com.fiap.domain.dto.paciente.BuscaCpfPacienteDTO;
 import br.com.fiap.domain.dto.paciente.DetalhamentoPacienteDTO;
 import br.com.fiap.domain.dto.paciente.PersistPacienteDTO;
 import br.com.fiap.domain.dto.paciente.UpdatePacienteDTO;
@@ -13,6 +14,7 @@ import br.com.fiap.domain.service.PacienteService;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.net.URI;
 import java.util.List;
@@ -41,6 +43,15 @@ public class PacienteResource {
         if (Objects.isNull(paciente)) return Response.status(404).build();
         return Response.ok(new DetalhamentoPacienteDTO(paciente)).build();
     }
+
+    @POST
+    @Path("/cpf")
+    public Response findByCpf(BuscaCpfPacienteDTO dto){
+        Paciente paciente = service.findByCpf(dto.cpf());
+        if (Objects.isNull(paciente)) return Response.status(404).build();
+        return Response.ok(new DetalhamentoPacienteDTO(paciente)).build();
+    }
+
 
     @DELETE
     @Path("/{id}")
